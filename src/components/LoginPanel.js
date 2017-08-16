@@ -46,6 +46,16 @@ const styles = theme => ({
 
 
 class LoginPanel extends Component {
+  constructor(props) {
+  super(props);
+    this.state = {
+        email: "",
+        emailHelperText: "Valid email is required!",
+        password :"",
+        passwordHelperText: "Password is required!"
+    };
+  }
+
 
   handleLogin() {
      var email = document.getElementById('email').value
@@ -59,6 +69,17 @@ class LoginPanel extends Component {
   handleReload() {
      this.props.loginUser("","")
   }
+
+  validateEmail = (email) => {
+    if (email.length > 0) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      let status = re.test(email);
+      return !status ? this.state.emailHelperText :  "";
+    }
+    return "";
+  }
+
+  handleEmailChange = () => this.validateEmail(this.state.email);
 
   handleChange() {
   }
@@ -84,7 +105,11 @@ class LoginPanel extends Component {
                   <TextField
                     required
                     id="email"
+                    type="email"
                     label="Email"
+                    value={this.state.email}
+                    onChange={event => this.setState({ email: event.target.value })}
+                    helperText={this.handleEmailChange()} 
                     className={classes.textField}
                     fullWidth
                     margin="normal"

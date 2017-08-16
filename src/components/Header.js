@@ -6,9 +6,10 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
+import Input from 'material-ui/Input/Input';
 import MenuIcon from 'material-ui-icons/Menu';
 
-const styles = {
+const styles = theme => ({
   root: {
     marginTop: 30,
     width: '100%',
@@ -16,7 +17,11 @@ const styles = {
   flex: {
     flex: 1,
   },
-};
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+  },
+});
 
 
 class Header extends Component {
@@ -38,7 +43,12 @@ class Header extends Component {
             <Typography type="title" color="inherit" className={classes.flex}>
               Home
             </Typography>
-            <Button color="contrast">Home</Button>
+            <Input
+              color="contrast"
+              placeholder="Search"
+              className={classes.textField}
+              type ="email"
+            />
           </Toolbar>
         </AppBar>
       </div>

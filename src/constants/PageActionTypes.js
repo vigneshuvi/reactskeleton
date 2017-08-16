@@ -4,3 +4,5 @@ export const PAGE_SPAM = 'SPAM'
 export const PAGE_FORUMS = 'FORUMS'
 export const PAGE_UPDATES = 'UPDATES'
 export const PAGE_SOCIAL = 'SOCIAL'
+
+export const DRAWER_STATUS = 'DRAWER_STATUS'

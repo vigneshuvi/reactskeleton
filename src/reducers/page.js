@@ -1,13 +1,17 @@
-import { PAGE_LOGIN, PAGE_HOME, PAGE_SPAM, PAGE_FORUMS, PAGE_UPDATES, PAGE_SOCIAL } from '../constants/PageActionTypes'
+import { DRAWER_STATUS, PAGE_LOGIN, PAGE_HOME, PAGE_SPAM, PAGE_FORUMS, PAGE_UPDATES, PAGE_SOCIAL } from '../constants/PageActionTypes'
 
 const initialPageState = {
-  	path: '/'
+  	path: '/',
+    drawerStatus: false
 };
 
 
 // Page Path
 export default function reducer(state = initialPageState, action) {
   	switch (action.type) {
+        case DRAWER_STATUS: {
+            return {...state, drawerStatus: action.payload.status}
+        }
         case PAGE_LOGIN:
             return {...state, path: action.payload}
         case PAGE_HOME:

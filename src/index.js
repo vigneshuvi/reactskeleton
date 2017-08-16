@@ -9,7 +9,7 @@ import createBrowserHistory from 'history/createBrowserHistory'
 
 
 import App from './containers/App'
-import MyForm from './components/MyForm'
+import LoginPanel from './components/LoginPanel'
 import store from './store'
 
 console.log(store.getState())
@@ -25,9 +25,9 @@ render(
   <Provider store={store}>
   	<CookiesProvider>
   		<Router history={history}>
-  			<div className="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  			<div>
       		<Route exact path="/" component={App}/>
-      		<Route path="/login" component={MyForm}/>
+      		<Route path="/login" component={LoginPanel}/>
       		</div>
       	</Router>
     </CookiesProvider>

@@ -1,5 +1,6 @@
 import * as postTypes from '../constants/PostActionTypes'
 import * as loginTypes from '../constants/LoginActionTypes'
+import * as pageTypes from '../constants/PageActionTypes'
 import axios from "axios";
 
 export function fetchTweets() {
@@ -23,6 +24,17 @@ export function fetchTweets() {
 }
 
 
+export function changeDrawerStatus(status) {
+   return function(dispatch) {
+      dispatch({
+          type: pageTypes.DRAWER_STATUS,
+          payload: {
+              status: status
+          }
+      });
+    }
+}
+
 export function loginUser(email, password) {
    return function(dispatch) {
       dispatch({
@@ -31,6 +43,19 @@ export function loginUser(email, password) {
               email: email,
               password: password,
               token: "XADFASDF23453ASDFZZ@#%@%DFs" 
+          }
+      });
+    }
+}
+
+export function logOut() {
+   return function(dispatch) {
+      dispatch({
+          type: loginTypes.LOGOUT,
+          payload: {
+              email: "",
+              password: "",
+              token: "" 
           }
       });
     }

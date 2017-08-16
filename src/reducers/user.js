@@ -1,11 +1,11 @@
-import { LOGIN_PROCESS, LOGIN_REJECTED, LOGIN_FULFILLED } from '../constants/LoginActionTypes'
+import { LOGOUT, LOGIN_PROCESS, LOGIN_REJECTED, LOGIN_FULFILLED } from '../constants/LoginActionTypes'
 
 
 const initialUserState = {
   	user: {
-  		  email: '',
-    		password: '',
-    		token: ''
+  		email: '',
+    	password: '',
+        token: ''
   	},
     loggingIn: false,
     loggedIn: false,
@@ -24,6 +24,14 @@ export default function reducer(state = initialUserState, action) {
                 ...state,
                 loggingIn: false,
                 loggedIn: true,
+                user: action.payload,
+            }
+        case LOGOUT:
+
+            return {
+                ...state,
+                loggingIn: false,
+                loggedIn: false,
                 user: action.payload,
             }
         default:

@@ -1,41 +1,57 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
+import MenuIcon from 'material-ui-icons/Menu';
+
+const styles = {
+  root: {
+    marginTop: 30,
+    width: '100%',
+  },
+  flex: {
+    flex: 1,
+  },
+};
+
 
 class Header extends Component {
 
+  showMenu() {
+     this.props.changeDrawerStatus(true)
+  }
+  
   render() {
     const { user } = this.props.user
+    const classes = this.props.classes;
     return (
-       <header className="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
-        <div className="mdl-layout__header-row">
-          <span className="mdl-layout-title">{user.email.length === 0 ? "Login" : "Home"}</span>
-          <div className="mdl-layout-spacer"></div>
-          <div className="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-            <label className="mdl-button mdl-js-button mdl-button--icon" htmlFor="search">
-              <i className="material-icons">search</i>
-            </label>
-            <div className="mdl-textfield__expandable-holder">
-              <input className="mdl-textfield__input" type="text" id="search"/>
-              <label className="mdl-textfield__label" htmlFor="search">Enter your query...</label>
-            </div>
-          </div>
-          <button className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
-            <i className="material-icons">more_vert</i>
-          </button>
-          <ul className="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" htmlFor="hdrbtn">
-            <li className="mdl-menu__item">About</li>
-            <li className="mdl-menu__item">Contact</li>
-            <li className="mdl-menu__item">Legal information</li>
-          </ul>
-        </div>
-      </header>
+      <div className={classes.root}>
+        <AppBar>
+          <Toolbar>
+            <IconButton color="contrast" aria-label="Menu" onClick={this.showMenu.bind(this)}>
+              <MenuIcon />
+            </IconButton>
+            <Typography type="title" color="inherit" className={classes.flex}>
+              Home
+            </Typography>
+            <Button color="contrast">Home</Button>
+          </Toolbar>
+        </AppBar>
+      </div>
     );
   }
 }
 
 Header.propTypes = {
-    user:  PropTypes.object.isRequired
-}
+  classes: PropTypes.object.isRequired,
+  user:  PropTypes.object.isRequired,
+  changeDrawerStatus:  PropTypes.func.isRequired,
+};
+
 
 // No need to connect()!
-export default Header;
+export default withStyles(styles)(Header);

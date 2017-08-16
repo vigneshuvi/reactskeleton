@@ -7,9 +7,9 @@ class MainContainer extends Component {
     const { page } = this.props
     console.log(page);
     return (
-      <main className="mdl-layout__content mdl-color--grey-100">
+      <div>
         <h1>{page.path}</h1>
-      </main>
+      </div>
     );
   }
 }

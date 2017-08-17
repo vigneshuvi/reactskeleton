@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
+// Material Styles
 import { withStyles } from 'material-ui/styles';
+
+// Material design components
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import Input from 'material-ui/Input/Input';
+
+// Meteraial Icons
 import MenuIcon from 'material-ui-icons/Menu';
 
 const styles = theme => ({

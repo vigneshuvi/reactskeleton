@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
+
+// Material Styles
+import { withStyles } from 'material-ui/styles';
+
 
 // Components
 import Drawer from 'material-ui/Drawer';
@@ -19,8 +22,10 @@ import SendIcon from 'material-ui-icons/Send';
 import SettingsPowerIcon from 'material-ui-icons/SettingsPower';
 import cookie from 'react-cookies';
 
+// Local Image
 import remyImage from '../images/user.jpg';
 
+// Style constant for Nav menu component
 const styles = {
   list: {
     width: 250,

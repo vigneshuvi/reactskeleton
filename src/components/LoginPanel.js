@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
+// Material Styles
 import { withStyles } from 'material-ui/styles';
+
+// Material design components
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import List, { ListItem} from 'material-ui/List';
@@ -8,6 +12,11 @@ import Divider from 'material-ui/Divider';
 import Card, { CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
+import Snackbar from 'material-ui/Snackbar';
+
+// Constants
+import { EMAIL_REQUIRED, PASSWORD_REQUIRED, EMAIL_VALIDATE_ERROR, PASSWORD_VALIDATE_ERROR } from '../constants/LoginActionTypes'
+
 
 const styles = theme => ({
   container: {
@@ -50,20 +59,29 @@ class LoginPanel extends Component {
   super(props);
     this.state = {
         email: "",
-        emailHelperText: "Valid email is required!",
         password :"",
-        passwordHelperText: "Password is required!"
+        error: false,
+        errorMessage: "",
     };
   }
 
+  handleRequestClose = () => {
+    this.setState({
+       error: false, errorMessage: ""
+    });
+  };
 
   handleLogin() {
      var email = document.getElementById('email').value
      var password = document.getElementById('password').value
-     if (email && password) {
+     if (!this.validateEmail(email)) {
+        this.setState({ error: true, errorMessage: EMAIL_REQUIRED})
+     } else if (password.length < 5) {
+        this.setState({ error: true, errorMessage: PASSWORD_VALIDATE_ERROR})
+     } else if (email && password) {
+        this.setState({ error: false, errorMessage: ""})
         this.props.loginUser(email,password)
      }
-
   }
 
   handleReload() {
@@ -74,12 +92,20 @@ class LoginPanel extends Component {
     if (email.length > 0) {
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       let status = re.test(email);
-      return !status ? this.state.emailHelperText :  "";
+      return status;
+    }
+    return false;
+  }
+
+  validateEmailWithErrorMessage = (email) => {
+    if (email.length > 0) {
+      let status = this.validateEmail(email);
+      return !status ? EMAIL_VALIDATE_ERROR :  "";
     }
     return "";
   }
 
-  handleEmailChange = () => this.validateEmail(this.state.email);
+  handleEmailChange = () => this.validateEmailWithErrorMessage(this.state.email);
 
   handleChange() {
   }
@@ -150,6 +176,14 @@ class LoginPanel extends Component {
           <Grid item xs>
           </Grid>
         </Grid>
+        <div>
+        <Snackbar
+          open={this.state.error}
+          message={this.state.errorMessage}
+          autoHideDuration={2000}
+          onRequestClose={this.handleRequestClose}
+        />
+      </div>
       </div>
     );
   }

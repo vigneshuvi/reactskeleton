@@ -9,7 +9,7 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import List, { ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import Card, { CardContent } from 'material-ui/Card';
+import Card from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 import Snackbar from 'material-ui/Snackbar';
@@ -74,8 +74,12 @@ class LoginPanel extends Component {
   handleLogin() {
      var email = document.getElementById('email').value
      var password = document.getElementById('password').value
-     if (!this.validateEmail(email)) {
+     if (email.length === 0) {
         this.setState({ error: true, errorMessage: EMAIL_REQUIRED})
+     } else if (!this.validateEmail(email)) {
+        this.setState({ error: true, errorMessage: EMAIL_VALIDATE_ERROR})
+     } else if (password.length === 0) {
+        this.setState({ error: true, errorMessage: PASSWORD_REQUIRED})
      } else if (password.length < 5) {
         this.setState({ error: true, errorMessage: PASSWORD_VALIDATE_ERROR})
      } else if (email && password) {

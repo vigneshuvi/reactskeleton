@@ -8,7 +8,6 @@ import { withStyles } from 'material-ui/styles';
 
 // Components
 import Drawer from 'material-ui/Drawer';
-import Button from 'material-ui/Button';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Avatar from 'material-ui/Avatar';
@@ -87,7 +86,6 @@ class NavMenu extends Component {
 
 
   render() {
-    const user = this.props.user
     const page = this.props.page
     const classes = this.props.classes;
    
@@ -96,7 +94,7 @@ class NavMenu extends Component {
         {mainOptions.map(option =>
             <ListItem button key={option.title}>
               <ListItemIcon>
-              {option.iconName}
+                {option.iconName}
               </ListItemIcon>
               <ListItemText primary={option.title}/>
             </ListItem>
@@ -108,7 +106,7 @@ class NavMenu extends Component {
         {subOptions.map(option =>
             <ListItem button key={option.title} onClick= {() => this.handleLogout()}>
               <ListItemIcon>
-              {option.iconName}
+                {option.iconName}
               </ListItemIcon>
               <ListItemText primary={option.title}/>
             </ListItem>
@@ -119,7 +117,7 @@ class NavMenu extends Component {
       <div>
        <Card className={classes.card}>
           <CardHeader
-            avatar={
+            avatar= {
               <Avatar
                 alt="Adelle Charles"
                 src={remyImage}

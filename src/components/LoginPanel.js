@@ -12,6 +12,9 @@ import Divider from 'material-ui/Divider';
 import Card from 'material-ui/Card';
 import Grid from 'material-ui/Grid';
 import Snackbar from 'material-ui/Snackbar';
+import { LinearProgress } from 'material-ui/Progress';
+
+
 
 // Constants
 import { EMAIL_REQUIRED, PASSWORD_REQUIRED, EMAIL_VALIDATE_ERROR, PASSWORD_VALIDATE_ERROR } from '../constants/LoginActionTypes'
@@ -111,7 +114,7 @@ class LoginPanel extends Component {
   handleEmailChange = () => this.validateEmailWithErrorMessage(this.state.email);
 
   render() {
-    const { user } = this.props.user
+    const { user, loggingIn } = this.props.user
     const classes = this.props.classes;
     console.log(user);
     return (
@@ -150,6 +153,7 @@ class LoginPanel extends Component {
                 </ListItem>
               </List>
               <Divider />
+              {loggingIn && <LinearProgress mode="query"/>}
               <List>
                 <ListItem>
                 <Grid container spacing={24}>
@@ -158,7 +162,7 @@ class LoginPanel extends Component {
                       Sign In
                   </Button>
                   </Grid>
-                  <Grid item xs={6} >
+                  <Grid item xs={6}>
                     <Button raised color="accent" className={classes.button} onClick={this.handleReload.bind(this)}>
                       Reload
                     </Button>

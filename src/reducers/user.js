@@ -20,6 +20,7 @@ export default function reducer(state = initialUserState, action) {
         case LOGIN_REJECTED:
             return {...state, loggingIn: false, error: action.payload}
         case LOGIN_FULFILLED:
+            localStorage.setItem('login-event', 'login' + Math.random());
             return {
                 ...state,
                 loggingIn: false,
@@ -27,7 +28,7 @@ export default function reducer(state = initialUserState, action) {
                 user: action.payload,
             }
         case LOGOUT:
-
+            localStorage.setItem('login-event', 'logout' + Math.random());
             return {
                 ...state,
                 loggingIn: false,

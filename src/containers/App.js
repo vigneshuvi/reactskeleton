@@ -3,6 +3,7 @@ import PropTypes, { instanceOf } from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withCookies, Cookies } from 'react-cookie';
+import axios from "axios";
 
 // Custom Pages
 
@@ -19,8 +20,6 @@ import * as AllActions from '../actions'
 
 
 
-
-
 class App extends Component {
  
   handleUserDetailsChange(email, token) {
@@ -33,6 +32,10 @@ class App extends Component {
     const { cookies } = this.props;
     var email = cookies.get('email') || '';
     var token = cookies.get('token') || '';
+
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = token;
+    }
 
     const { user, posts, page } = this.props;
     var isLoggedIn = user.loggedIn;

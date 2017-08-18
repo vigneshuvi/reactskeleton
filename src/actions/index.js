@@ -3,6 +3,9 @@ import * as loginTypes from '../constants/LoginActionTypes'
 import * as pageTypes from '../constants/PageActionTypes'
 import axios from "axios";
 
+// axios.defaults.baseURL = 'YOUR APPLICATION SERVICE BASE URL';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+
 export function fetchTweets() {
   return function(dispatch) {
     dispatch({type: postTypes.FETCH_POSTS});
@@ -36,16 +39,46 @@ export function changeDrawerStatus(status) {
 }
 
 export function loginUser(email, password) {
-   return function(dispatch) {
-      dispatch({
+  return function(dispatch) {
+    dispatch({type: loginTypes.LOGIN_PROCESS});
+
+    setTimeout(function() { 
+          dispatch({
           type: loginTypes.LOGIN_FULFILLED,
           payload: {
               email: email,
               password: password,
-              token: "XADFASDF23453ASDFZZ@#%@%DFs" 
+              token: "XADSDFAEQWEADFAEWQGLLHPADSFHLALDSFUO" 
           }
       });
-    }
+    }.bind(this), 4500);
+    /*
+    SAMPLE POST REQUEST
+    var requstBody = { body : {email:email, password:password} };
+
+    axios.post('authenticate/', requstBody)
+      .then((response) => {
+        let token = response.data.token;
+        if (token) {
+          dispatch({
+            type: loginTypes.LOGIN_FULFILLED,
+            payload: {
+              email: email,
+              password: password,
+              token: token 
+          }})
+        } else {
+          dispatch({
+            type: loginTypes.LOGIN_REJECTED,
+            payload: "Error while logged in by user"
+          })
+        }
+      })
+      .catch((err) => {
+        dispatch({type: loginTypes.LOGIN_REJECTED, payload: err})
+      })
+      */
+  }
 }
 
 export function logOut() {

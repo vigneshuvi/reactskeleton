@@ -13,6 +13,17 @@ import Divider from 'material-ui/Divider';
 import Avatar from 'material-ui/Avatar';
 import Card, { CardHeader} from 'material-ui/Card';
 
+import Button from 'material-ui/Button';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
+
+import Slide from 'material-ui/transitions/Slide';
+
+
 // Icons
 import InboxIcon from 'material-ui-icons/Inbox';
 import DraftsIcon from 'material-ui-icons/Drafts';
@@ -71,10 +82,31 @@ const subOptions = [
 
 class NavMenu extends Component {
 
-  handleLogout() {  
-    cookie.remove('token', { path: '/' });
-    cookie.remove('email', { path: '/' });
-    this.props.logOut();
+  state = {
+    open: false,
+  };
+
+  logoutAction = () => {
+        cookie.remove('token', { path: '/' });
+        cookie.remove('email', { path: '/' });
+        this.props.logOut();
+  }
+
+  handleLogoutAction = (status) => {
+    this.setState({ open: false });
+    if (status) {
+        setTimeout(function() { 
+          this.logoutAction(); 
+        }.bind(this), 1000);
+    }
+  };
+
+
+  handleLogoutYesAction = () => this.handleLogoutAction(true);
+  handleLogoutNoAction = () => this.handleLogoutAction(false);
+
+  handleLogoutState() {  
+    this.setState({ open: true });
   }
 
   toggleDrawer = (side, open) => {
@@ -85,10 +117,36 @@ class NavMenu extends Component {
   handleLeftClose = () => this.toggleDrawer('left', false);
 
 
+
+
   render() {
     const page = this.props.page
     const classes = this.props.classes;
+
+    const logoutPopupBox =  (
+      <div>
+        <Dialog open={this.state.open} transition={Slide} onRequestClose={this.handleLogoutNoAction}>
+          <DialogTitle>
+            {"React Skeleton"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Are you sure want to logout the app?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleLogoutYesAction} color="primary">
+              Yes
+            </Button>
+            <Button onClick={this.handleLogoutNoAction} color="primary">
+              No
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
    
+   // Main menu list
     const mainListItems = (
       <div>
         {mainOptions.map(option =>
@@ -101,10 +159,12 @@ class NavMenu extends Component {
           )}
       </div>
     );
+
+    // Sub menu list
     const subListItems = (
       <div>
         {subOptions.map(option =>
-            <ListItem button key={option.title} onClick= {() => this.handleLogout()}>
+            <ListItem button key={option.title} onClick= {() => this.handleLogoutState()}>
               <ListItemIcon>
                 {option.iconName}
               </ListItemIcon>
@@ -113,6 +173,8 @@ class NavMenu extends Component {
           )}
       </div>
     );
+
+    // Merge list with card.
     const sideList = (
       <div>
        <Card className={classes.card}>
@@ -137,12 +199,16 @@ class NavMenu extends Component {
         </List>
       </div>
     );
+
+    const status = this.state.open ? this.state.open : page.drawerStatus;
+
     return (
       <Drawer
-          open={page.drawerStatus}
+          open={status}
           onRequestClose={this.handleLeftClose}
           onClick={this.handleLeftClose} >
         {sideList}
+        {logoutPopupBox}
       </Drawer>
     );
   }

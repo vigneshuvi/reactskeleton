@@ -10,7 +10,6 @@ import Button from 'material-ui/Button';
 import List, { ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Card from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 import Snackbar from 'material-ui/Snackbar';
 
@@ -24,7 +23,7 @@ const styles = theme => ({
     align: 'center',
     flexGrow: 1,
     direction: 'row',
-    marginTop: theme.spacing.unit,
+    marginTop: 50,
     marginBottom: theme.spacing.unit,
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
@@ -111,8 +110,6 @@ class LoginPanel extends Component {
 
   handleEmailChange = () => this.validateEmailWithErrorMessage(this.state.email);
 
-  handleChange() {
-  }
   render() {
     const { user } = this.props.user
     const classes = this.props.classes;
@@ -122,15 +119,9 @@ class LoginPanel extends Component {
        <Grid container spacing={24}>
         <Grid item xs>
         </Grid>
-        <Grid item item xs={12} className={classes.grid}>
+        <Grid item xs className={classes.grid}>
             <Card className={classes.card}>
               <List>
-                <ListItem>
-                 <Typography type="headline" component="h2">
-                    Login
-                </Typography>
-                </ListItem>
-                 <Divider />
                 <ListItem>
                   <TextField
                     required
@@ -177,8 +168,8 @@ class LoginPanel extends Component {
               </List>
             </Card>
         </Grid>
-          <Grid item xs>
-          </Grid>
+        <Grid item xs>
+        </Grid>
         </Grid>
         <div>
         <Snackbar

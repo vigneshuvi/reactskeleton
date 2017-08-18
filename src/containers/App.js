@@ -4,15 +4,21 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withCookies, Cookies } from 'react-cookie';
 
-// Custon components
+// Custom Pages
+
+import WelcomePage from '../pages/WelcomePage'
+
+// Custom components
 import Header from '../components/Header'
 import NavMenu from '../components/NavMenu'
 import MainContainer from '../components/MainContainer'
 import AppFooter from '../components/AppFooter'
-import LoginPanel from '../components/LoginPanel'
 
 // All registered Actions.
 import * as AllActions from '../actions'
+
+
+
 
 
 class App extends Component {
@@ -47,7 +53,7 @@ class App extends Component {
         this.handleUserDetailsChange(email, token)
         return (
           <div>
-            <LoginPanel user={user}  loginUser={this.props.actions.loginUser}/>
+            <WelcomePage user={user}  loginUser={this.props.actions.loginUser}/>
           </div>
         );
     }

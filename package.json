@@ -2,6 +2,7 @@
   "name": "reactskeleton",
   "version": "0.0.1",
   "private": true,
+  "homepage" : "http://vigneshuvi.github.io/reactskeleton",
   "devDependencies": {
     "babel-plugin-react-html-attrs": "^2.0.0",
     "enzyme": "^2.8.2",

@@ -28,7 +28,7 @@ injectTapEventPlugin();
 // listen to storage event
 window.addEventListener('storage', function(event){
     // do what you want on logout-event
-    if (event.key == 'login-event') {
+    if (event.key === 'login-event') {
       window.location.reload()
       // window.location = "logout.php";
     }

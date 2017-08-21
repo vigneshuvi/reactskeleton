@@ -29,6 +29,7 @@ export default function reducer(state = initialUserState, action) {
             }
         case LOGOUT:
             localStorage.setItem('login-event', 'logout' + Math.random());
+            localStorage.removeItem('theme-change-event');
             return {
                 ...state,
                 loggingIn: false,

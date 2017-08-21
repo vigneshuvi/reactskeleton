@@ -51,6 +51,19 @@ export function changeDrawerStatus(status) {
 export function loginUser(email, password) {
   return function(dispatch) {
     dispatch({type: loginTypes.LOGIN_PROCESS});
+    dispatch({
+          type: pageTypes.THEME_CHANAGE,
+          payload: {
+              status: false
+          }
+      });
+
+    dispatch({
+          type: pageTypes.DRAWER_STATUS,
+          payload: {
+              status: false
+          }
+      });
 
     setTimeout(function() { 
           dispatch({
@@ -93,6 +106,19 @@ export function loginUser(email, password) {
 
 export function logOut() {
    return function(dispatch) {
+      dispatch({
+          type: pageTypes.THEME_CHANAGE,
+          payload: {
+              status: false
+          }
+      });
+
+      dispatch({
+          type: pageTypes.DRAWER_STATUS,
+          payload: {
+              status: false
+          }
+      });
       dispatch({
           type: loginTypes.LOGOUT,
           payload: {

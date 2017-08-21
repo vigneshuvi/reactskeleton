@@ -79,9 +79,11 @@ class App extends Component {
         token = user.user.token;
         this.handleUserDetailsChange(email, token)
         return (
-          <div>
-            <WelcomePage user={user}  loginUser={this.props.actions.loginUser}/>
-          </div>
+          <MuiThemeProvider theme={theme1}>
+            <div>
+              <WelcomePage user={user}  loginUser={this.props.actions.loginUser}/>
+            </div>
+          </MuiThemeProvider >
         );
     }
     

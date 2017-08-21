@@ -1,14 +1,23 @@
-import { DRAWER_STATUS, PAGE_LOGIN, PAGE_HOME, PAGE_SPAM, PAGE_FORUMS, PAGE_UPDATES, PAGE_SOCIAL } from '../constants/PageActionTypes'
+import { THEME_CHANAGE, DRAWER_STATUS, PAGE_LOGIN, PAGE_HOME, PAGE_SPAM, PAGE_FORUMS, PAGE_UPDATES, PAGE_SOCIAL } from '../constants/PageActionTypes'
 
 const initialPageState = {
   	path: '/',
-    drawerStatus: false
+    drawerStatus: false,
+    themeChange: localStorage.getItem('theme-change-event') ? true : false,
 };
 
 
 // Page Path
 export default function reducer(state = initialPageState, action) {
   	switch (action.type) {
+        case THEME_CHANAGE: {
+            if (action.payload.status) {
+                localStorage.setItem('theme-change-event', true);
+            } else {
+                localStorage.removeItem('theme-change-event');
+            }
+            return {...state, themeChange: action.payload.status}
+        }
         case DRAWER_STATUS: {
             return {...state, drawerStatus: action.payload.status}
         }

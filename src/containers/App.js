@@ -18,7 +18,31 @@ import AppFooter from '../components/AppFooter'
 // All registered Actions.
 import * as AllActions from '../actions'
 
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import createPalette from 'material-ui/styles/palette';
 
+import purple from 'material-ui/colors/purple';
+import green from 'material-ui/colors/green';
+import red from 'material-ui/colors/red';
+import Button from 'material-ui/Button';
+
+    const theme1 = createMuiTheme({
+  palette: createPalette({
+    type:  'light', // Switching the dark mode on is a single property value change.
+  }),
+});
+
+
+const theme2 = createMuiTheme({
+  palette: createPalette({
+    primary: purple, // Purple and green play nicely together.
+    accent: {
+      ...green,
+      A400: '#00e677',
+    },
+    error: red,
+  }),
+});
 
 class App extends Component {
  
@@ -60,14 +84,17 @@ class App extends Component {
           </div>
         );
     }
-
+    
+    const changedTheme = page.themeChange ? page.themeChange : localStorage.getItem('theme-change-event');
     return (
-      <div >
-        <Header user={user} changeDrawerStatus={this.props.actions.changeDrawerStatus}/>
-        <NavMenu user={user} page={page} changeDrawerStatus={this.props.actions.changeDrawerStatus} logOut={this.props.actions.logOut}/>
-        <MainContainer page={page} user={user} posts={posts}/>
-        <AppFooter  user={user} />
-      </div>
+      <MuiThemeProvider theme={changedTheme ? theme2 : theme1}>
+        <div >
+          <Header user={user} changeDrawerStatus={this.props.actions.changeDrawerStatus}/>
+          <NavMenu user={user} page={page} changeDrawerStatus={this.props.actions.changeDrawerStatus} changeThemeStatus={this.props.actions.changeThemeStatus} logOut={this.props.actions.logOut}/>
+          <MainContainer page={page} user={user} posts={posts}/>
+          <AppFooter  user={user} />
+        </div>
+      </MuiThemeProvider >
     );
   }
 }

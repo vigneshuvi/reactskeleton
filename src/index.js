@@ -1,21 +1,21 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { CookiesProvider } from 'react-cookie';
 import { Router, Route } from 'react-router'
 
-//import { BrowserRouter as Router, Route, IndexRoute } from 'react-router-dom';
 
 import createBrowserHistory from 'history/createBrowserHistory'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-
 import App from './containers/App'
 import store from './store'
+
 
 console.log(store.getState())
 
 let history = createBrowserHistory();
+
 
 history.listen((location, action) => {
   console.log(`The current URL is ${location.pathname}${location.search}${location.hash}`)
@@ -32,18 +32,24 @@ window.addEventListener('storage', function(event){
     if (event.key === 'login-event') {
       window.location.reload()
       // window.location = "logout.php";
-    }
+    } 
 }, false);
 
-render(
-  <Provider store={store}>
-  	<CookiesProvider>
-  		<Router history={history}>
-  			<div>
-         <Route exact path="/" component={App}/>
-      	</div>
-      </Router>
-    </CookiesProvider>
-  </Provider>,
-  document.getElementById('root')
-);
+
+class UviApp extends Component {
+  render() {
+    return (<Provider store={store}>
+      <CookiesProvider>
+        <Router history={history}>
+          <div>
+           <Route exact path="/" component={App}/>
+          </div>
+        </Router>
+      </CookiesProvider>
+    </Provider>);
+  }
+}
+
+
+render(<UviApp />, document.getElementById('root'));
+

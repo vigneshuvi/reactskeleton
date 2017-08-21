@@ -6,3 +6,5 @@ export const PAGE_UPDATES = 'UPDATES'
 export const PAGE_SOCIAL = 'SOCIAL'
 
 export const DRAWER_STATUS = 'DRAWER_STATUS'
+
+export const THEME_CHANAGE = 'THEME_CHANAGE'

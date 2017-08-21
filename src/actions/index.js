@@ -26,6 +26,16 @@ export function fetchTweets() {
   }
 }
 
+export function changeThemeStatus(status) {
+   return function(dispatch) {
+      dispatch({
+          type: pageTypes.THEME_CHANAGE,
+          payload: {
+              status: status
+          }
+      });
+    }
+}
 
 export function changeDrawerStatus(status) {
    return function(dispatch) {

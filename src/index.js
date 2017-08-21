@@ -39,9 +39,8 @@ render(
   	<CookiesProvider>
   		<Router history={history}>
   			<div>
-      		<Route exact path="/" component={App}/>
-      		<Route path="/login" component={WelcomePage}/>
-      		</div>
+      		<App/>
+      	</div>
       	</Router>
     </CookiesProvider>
   </Provider>,

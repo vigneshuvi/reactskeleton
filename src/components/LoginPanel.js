@@ -56,15 +56,18 @@ const styles = theme => ({
 });
 
 
-class LoginPanel extends Component {
-  constructor(props) {
-  super(props);
-    this.state = {
+
+const initialState = {
         email: "",
         password :"",
         error: false,
         errorMessage: "",
     };
+
+class LoginPanel extends Component {
+  constructor(props) {
+  super(props);
+    this.state = initialState;
   }
 
   handleRequestClose = () => {
@@ -91,7 +94,7 @@ class LoginPanel extends Component {
   }
 
   handleReload() {
-     this.props.loginUser("","")
+     this.setState(initialState);
   }
 
   validateEmail = (email) => {
@@ -143,6 +146,8 @@ class LoginPanel extends Component {
                   <TextField
                     required
                     id="password"
+                    value={this.state.password}
+                    onChange={event => this.setState({ password: event.target.value })}
                     label="Password"
                     className={classes.textField}
                     type="password"

@@ -2,14 +2,15 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { CookiesProvider } from 'react-cookie';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router'
+
+//import { BrowserRouter as Router, Route, IndexRoute } from 'react-router-dom';
 
 import createBrowserHistory from 'history/createBrowserHistory'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 
 import App from './containers/App'
-import WelcomePage from './pages/WelcomePage'
 import store from './store'
 
 console.log(store.getState())
@@ -39,10 +40,10 @@ render(
   	<CookiesProvider>
   		<Router history={history}>
   			<div>
-      		<App/>
+         <Route exact path="/" component={App}/>
       	</div>
-      	</Router>
+      </Router>
     </CookiesProvider>
   </Provider>,
   document.getElementById('root')
-)
+);

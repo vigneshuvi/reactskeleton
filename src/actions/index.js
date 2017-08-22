@@ -48,6 +48,19 @@ export function changeDrawerStatus(status) {
     }
 }
 
+export function loginSuccessEvent(email, password, token) {
+   return function(dispatch) {
+      dispatch({
+          type: loginTypes.LOGIN_FULFILLED,
+          payload: {
+              email: email,
+              password: password,
+              token: token
+          }
+      });
+  };
+}
+
 export function loginUser(email, password) {
   return function(dispatch) {
     dispatch({type: loginTypes.LOGIN_PROCESS});
@@ -66,14 +79,7 @@ export function loginUser(email, password) {
       });
 
     setTimeout(function() { 
-          dispatch({
-          type: loginTypes.LOGIN_FULFILLED,
-          payload: {
-              email: email,
-              password: password,
-              token: "XADSDFAEQWEADFAEWQGLLHPADSFHLALDSFUO" 
-          }
-      });
+        this.loginSuccessEvent(email, password, "XADSDFAEQWEADFAEWQGLLHPADSFHLALDSFUO");
     }.bind(this), 4500);
     /*
     SAMPLE POST REQUEST

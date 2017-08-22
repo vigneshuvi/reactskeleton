@@ -210,8 +210,8 @@ class NavMenu extends Component {
       </div>
     );
 
-
-
+    const user = this.props.user.user
+    const userEmail =  user.email
     // Merge list with card.
     const sideList = (
       <div>
@@ -224,8 +224,8 @@ class NavMenu extends Component {
                 className={classNames(classes.avatar, classes.bigAvatar)}
               />
             }
-            title="Vignesh kumar"
-            subheader="September 14, 2017"
+            title={userEmail}
+            subheader={ (new Date()).toDateString()}
           />
         </Card>
         <List className={classes.list} disablePadding>

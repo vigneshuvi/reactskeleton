@@ -24,9 +24,8 @@ import createPalette from 'material-ui/styles/palette';
 import purple from 'material-ui/colors/purple';
 import green from 'material-ui/colors/green';
 import red from 'material-ui/colors/red';
-import Button from 'material-ui/Button';
 
-    const theme1 = createMuiTheme({
+const theme1 = createMuiTheme({
   palette: createPalette({
     type:  'light', // Switching the dark mode on is a single property value change.
   }),
@@ -46,6 +45,15 @@ const theme2 = createMuiTheme({
 
 class App extends Component {
  
+  componentWillMount(){
+    // perform any preparations for an upcoming update
+     const { cookies } = this.props;
+    var email = cookies.get('email') || null;
+    var token = cookies.get('token') || null;
+    if (email || token) {
+        this.props.actions.loginSuccessEvent(email,"",token);
+    }
+  }
   handleUserDetailsChange(email, token) {
     const { cookies } = this.props;
     cookies.set('email', email, { path: '/' });

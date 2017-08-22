@@ -1,4 +1,4 @@
-import { LOGOUT, LOGIN_PROCESS, LOGIN_REJECTED, LOGIN_FULFILLED } from '../constants/LoginActionTypes'
+import { LOGOUT,LOGIN_RESTORE, LOGIN_PROCESS, LOGIN_REJECTED, LOGIN_FULFILLED } from '../constants/LoginActionTypes'
 
 
 const initialUserState = {
@@ -21,6 +21,13 @@ export default function reducer(state = initialUserState, action) {
             return {...state, loggingIn: false, error: action.payload}
         case LOGIN_FULFILLED:
             localStorage.setItem('login-event', 'login' + Math.random());
+            return {
+                ...state,
+                loggingIn: false,
+                loggedIn: true,
+                user: action.payload,
+            }
+        case LOGIN_RESTORE:
             return {
                 ...state,
                 loggingIn: false,

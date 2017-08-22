@@ -48,10 +48,10 @@ export function changeDrawerStatus(status) {
     }
 }
 
-export function loginSuccessEvent(email, password, token) {
+export function loginRestoreEvent(email, password, token) {
    return function(dispatch) {
       dispatch({
-          type: loginTypes.LOGIN_FULFILLED,
+          type: loginTypes.LOGIN_RESTORE,
           payload: {
               email: email,
               password: password,
@@ -79,7 +79,14 @@ export function loginUser(email, password) {
       });
 
     setTimeout(function() { 
-        this.loginSuccessEvent(email, password, "XADSDFAEQWEADFAEWQGLLHPADSFHLALDSFUO");
+      dispatch({
+          type: loginTypes.LOGIN_FULFILLED,
+          payload: {
+              email: email,
+              password: password,
+              token: "XADSDFAEQWEADFAEWQGLLHPADSFHLALDSFUO"
+          }
+      });
     }.bind(this), 4500);
     /*
     SAMPLE POST REQUEST
@@ -112,6 +119,18 @@ export function loginUser(email, password) {
 
 export function logOut() {
    return function(dispatch) {
+
+      dispatch({
+          type: loginTypes.LOGOUT,
+          payload: {
+              email: "",
+              password: "",
+              token: "" 
+          }
+      });
+
+
+    setTimeout(function() { 
       dispatch({
           type: pageTypes.THEME_CHANAGE,
           payload: {
@@ -125,14 +144,9 @@ export function logOut() {
               status: false
           }
       });
-      dispatch({
-          type: loginTypes.LOGOUT,
-          payload: {
-              email: "",
-              password: "",
-              token: "" 
-          }
-      });
+    }.bind(this), 10);
+
+
     }
 }
 

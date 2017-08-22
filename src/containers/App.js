@@ -51,7 +51,7 @@ class App extends Component {
     var email = cookies.get('email') || null;
     var token = cookies.get('token') || null;
     if (email || token) {
-        this.props.actions.loginSuccessEvent(email,"",token);
+        this.props.actions.loginRestoreEvent(email,"",token);
     }
   }
   handleUserDetailsChange(email, token) {

@@ -11,6 +11,16 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import App from './containers/App'
 import store from './store'
 
+import ReactGA from 'react-ga'
+
+
+
+ReactGA.initialize('UA-71297148-1');
+
+function logPageView() {
+  ReactGA.set({ page: window.location.pathname + window.location.search });
+  ReactGA.pageview(window.location.pathname + window.location.search);
+}
 
 console.log(store.getState())
 
@@ -37,11 +47,12 @@ window.addEventListener('storage', function(event){
 
 class UviApp extends Component {
   render() {
+    logPageView();
     return (<Provider store={store}>
       <CookiesProvider>
-        <Router history={history}>
+        <Router history={history} onUpdate={logPageView}>
           <div>
-           <App/>
+             <Route path="/" component={App}/>
           </div>
         </Router>
       </CookiesProvider>

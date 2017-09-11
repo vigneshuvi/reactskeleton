@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { CookiesProvider } from 'react-cookie';
 import { Router, Route } from 'react-router'
+import 'react-grid-layout/css/styles.css'
 
 
 import createBrowserHistory from 'history/createBrowserHistory'
